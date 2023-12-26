@@ -60,7 +60,7 @@ cd VmwareWorkstationPro-Cracking-script
 
 ```bash
 chmod +x vmware.sh
-.vmware.sh
+/.vmware.sh
 ```
 Follow the prompts to select options and crack VMware software.
 
