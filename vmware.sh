@@ -23,6 +23,7 @@ animate_loading() {
 show_ui() {
     clear
     print_colored "
+    Welcome to the Vmware Cracking script.This script was written by CHEGEBB follow me on github for more.
     ____   ____               _________                       __
     \\   \\ /   /____           \\_   ___ \\____________    ____ |  | __ ___________
      \\   Y   /     \\   ______ /    \\  \\/\\_  __ \\__  \\ _/ ___\\|  |/ // __ \\_  __ \\
