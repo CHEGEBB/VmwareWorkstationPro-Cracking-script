@@ -54,10 +54,10 @@ Follow the prompts to select options and crack VMware software.
 
 
 
-Author
+## Author
 👨‍💻 CHEGEBB
 
-GitHub
+## GitHub
 🔗 GitHub Repository[https://github.com/CHEGEBB/VmwareWorkstationPro-Cracking-script.git]
 
 Feel free to contribute and report issues on GitHub! Happy cracking! 🎉
