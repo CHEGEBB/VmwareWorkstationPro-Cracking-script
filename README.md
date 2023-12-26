@@ -18,7 +18,7 @@ cd C:\Users\username\Desktop\VmwareWorkstationPro-Cracking-script
 
 Run the PowerShell script:
 ```bash
-.\crack_vmware.ps1
+.\vmware.ps1
 ```
 Follow the interactive prompts to select options and crack VMware software.
 ## 2.Python
