@@ -9,7 +9,7 @@ clone the repo to the windows system using gitbash or github desktop
 ```bash
 git clone https://github.com/CHEGEBB/VmwareWorkstationPro-Cracking-script.git
 ```
-Open a WindowsPowershell.
+Open  Windows Powershell or search it in the windows search bar.
 
 Navigate to the project directory where you have cloned.e.g
 ```bash
