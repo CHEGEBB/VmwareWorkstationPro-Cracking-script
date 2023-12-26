@@ -45,7 +45,7 @@ Open a WindowsPowershell.
 
 Navigate to the project directory.e.g
 ```bash
-cd C:\Users\brian\Desktop\VmwareWorkstationPro-Cracking-script
+cd C:\Users\username\Desktop\VmwareWorkstationPro-Cracking-script
 ```
 
 Run the PowerShell script:
