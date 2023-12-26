@@ -34,6 +34,7 @@ function Animate-Rotating-Loading {
 function Show-UI {
     Clear-Host
     Print-Colored @"
+    Welcome to the VMware Cracking Script!This script was created by CHEGEBB.Follow me on GitHub:
     ____   ____               _________                       __
     \   \ /   /____           \_   ___ \____________    ____ |  | __ ___________
      \   Y   /     \   ______ /    \  \/\_  __ \__  \ _/ ___\|  |/ // __ \_  __ \
