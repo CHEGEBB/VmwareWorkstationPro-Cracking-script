@@ -2,6 +2,8 @@
 Welcome to the VMware Cracker project! 🚀 This project provides a script written in Python, Shell, and PowerShell to assist with cracking VMware software.
 ## For windows os ,use powershell
 ## For linux both python and shell will work
+
+## Theres a download option for those that have not downloaded
 # 1.PowerShell
 ## Usage
 clone the repo to the windows system using gitbash or github desktop
