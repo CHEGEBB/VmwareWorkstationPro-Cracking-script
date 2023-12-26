@@ -20,7 +20,7 @@ function Animate-Loading {
 
 # Function for animated rotating loading
 function Animate-Rotating-Loading {
-    $spinner = @("/", "-", "\\", "|")
+    $spinner = @("/", "-", "\", "|")
     for ($i = 0; $i -le 5; $i++) {
         foreach ($spin in $spinner) {
             Write-Host -NoNewline "$spin`r"
@@ -34,7 +34,7 @@ function Animate-Rotating-Loading {
 function Show-UI {
     Clear-Host
     Print-Colored @"
-    Welcome to the VMware Cracking Script!This script was created by CHEGEBB.Follow me on GitHub:
+    Welcome to the VMware Cracking Script! This script was created by CHEGEBB. Follow me on GitHub:
     ____   ____               _________                       __
     \   \ /   /____           \_   ___ \____________    ____ |  | __ ___________
      \   Y   /     \   ______ /    \  \/\_  __ \__  \ _/ ___\|  |/ // __ \_  __ \
@@ -216,52 +216,116 @@ function Open-Vmware-With-Key-Gui {
     # to activate VMware with the provided key.
 }
 
-# Function for downloading
-function Download {
-    try {
-        $url = if ($IsWindows) {
-            "https://www.vmware.com/go/getworkstation-win"
-        } else {
-            "https://www.vmware.com/go/getworkstation-linux"
-        }
-
-        $response = Invoke-RestMethod -Uri $url -Method Head
-        $downloadUrl = $response.Headers.Location
-
-        if ($IsWindows) {
-            Start-Process $downloadUrl
-        } else {
-            Start-Process xdg-open -ArgumentList $downloadUrl
-        }
-    } catch {
-        Print-Colored "Error!" -ForegroundColor Red
-        Start-Sleep -Seconds 1
-        Download
-    }
-}
-
-# Function to detect the version
+# Function to detect the version with animated progress
 function Detect-Version {
     try {
-        $registryKeyPath = "HKLM:\SOFTWARE\WOW6432Node\VMware, Inc.\VMware Workstation"
-        $keyExists = Test-Path $registryKeyPath
+        $spinner = @("-", "\\", "|", "/")
+        $versionDetectionMessage = "Detecting Version: VMware Workstation"
+        $timeoutInSeconds = 30
+        $startTime = Get-Date
+        $versionDetermined = $false
+        $progressWidth = 20
 
-        if (-not $keyExists) {
-            Print-Colored "VMware Workstation is not installed." -ForegroundColor Yellow
-            return
+        # Start the detection in the background
+        $detectionJob = Start-Job -ScriptBlock {
+            param($versionDetectionMessage, $spinner, $progressWidth)
+            $progress = "[" + ('=' * $progressWidth) + "]"
+            while ($true) {
+                foreach ($spin in $spinner) {
+                    Clear-Host
+                    Print-Colored "$versionDetectionMessage $progress $spin`r" -ForegroundColor Yellow
+                    Start-Sleep -Milliseconds 100
+                }
+            }
+        } -ArgumentList $versionDetectionMessage, $spinner, $progressWidth
+
+        while ((Get-Date).Subtract($startTime).TotalSeconds -lt $timeoutInSeconds -and -not $versionDetermined) {
+            $registryKeyPath = "HKLM:\SOFTWARE\WOW6432Node\VMware, Inc.\VMware Workstation"
+            $keyExists = Test-Path $registryKeyPath
+
+            if ($keyExists) {
+                $version = Get-WmiObject Win32_Product | Where-Object { $_.Caption -like "*VMware Workstation*" } | Select-Object -ExpandProperty Version
+
+                if ($version) {
+                    $versionDetermined = $true
+                    Clear-Host
+                    Print-Colored "Detected Version: VMware Workstation $version" -ForegroundColor Green
+                    Stop-Job $detectionJob  # Stop the detection animation
+                    Remove-Job $detectionJob  # Remove the detection job
+                    Start-Sleep -Seconds 2  # Display the version for 2 seconds
+                    Crack-Menu  # Reload the crack menu
+                    return
+                }
+            }
         }
 
-        $version = Get-WmiObject Win32_Product | Where-Object { $_.Caption -like "*VMware Workstation*" } | Select-Object -ExpandProperty Version
-        if ($version) {
-            Print-Colored "Detected Version: VMware Workstation $version" -ForegroundColor Green
-        } else {
-            Print-Colored "Unable to determine the VMware Workstation version." -ForegroundColor Red
+        Clear-Host
+        Stop-Job $detectionJob  # Stop the detection animation
+        Remove-Job $detectionJob  # Remove the detection job
+        if (-not $versionDetermined) {
+            Print-Colored "Timed out. Unable to detect the VMware Workstation version." -ForegroundColor Red
+            Start-Sleep -Seconds 2  # Display the error message for 2 seconds
+            Crack-Menu  # Reload the crack menu
         }
     } catch {
         $errorMessage = $_.Exception.Message
         Print-Colored "Error during version detection: $errorMessage" -ForegroundColor Red
+        Start-Sleep -Seconds 2  # Display the error message for 2 seconds
+        Crack-Menu  # Reload the crack menu
     }
 }
+
+
+# Function to detect the version with rotating animation and timeout
+function Detect-Version {
+    try {
+        $spinner = @("/", "-", "\", "|")
+        $versionDetectionMessage = "Detecting Version: VMware Workstation"
+        $timeoutInSeconds = 30
+        $startTime = Get-Date
+        $versionDetermined = $false
+        $progressWidth = 20
+
+        while ((Get-Date).Subtract($startTime).TotalSeconds -lt $timeoutInSeconds -and -not $versionDetermined) {
+            foreach ($spin in $spinner) {
+                Clear-Host
+                $progress = "[" + ('=' * $progressWidth) + "]"
+                Print-Colored "$versionDetectionMessage $progress $spin`r" -ForegroundColor Yellow
+                Start-Sleep -Milliseconds 200
+            }
+
+            $registryKeyPath = "HKLM:\SOFTWARE\WOW6432Node\VMware, Inc.\VMware Workstation"
+            $keyExists = Test-Path $registryKeyPath
+
+            if ($keyExists) {
+                $version = Get-WmiObject Win32_Product | Where-Object { $_.Caption -like "*VMware Workstation*" } | Select-Object -ExpandProperty Version
+
+                if ($version) {
+                    $versionDetermined = $true
+                    Clear-Host
+                    Print-Colored "Detected Version: VMware Workstation $version" -ForegroundColor Green
+                    Start-Sleep -Seconds 2  # Display the version for 2 seconds
+                    Crack-Menu  # Reload the crack menu
+                    return
+                }
+            }
+        }
+
+        Clear-Host
+        if (-not $versionDetermined) {
+            Print-Colored "Timed out. Unable to detect the VMware Workstation version." -ForegroundColor Red
+            Start-Sleep -Seconds 2  # Display the error message for 2 seconds
+            Crack-Menu  # Reload the crack menu
+        }
+    } catch {
+        $errorMessage = $_.Exception.Message
+        Print-Colored "Error during version detection: $errorMessage" -ForegroundColor Red
+        Start-Sleep -Seconds 2  # Display the error message for 2 seconds
+        Crack-Menu  # Reload the crack menu
+    }
+}
+
+
 
 # Main function
 function Main {
