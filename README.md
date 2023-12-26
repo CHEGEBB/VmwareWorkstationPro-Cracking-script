@@ -61,8 +61,6 @@ GitHub
 🔗 GitHub Repository[https://github.com/CHEGEBB/VmwareWorkstationPro-Cracking-script.git]
 
 Feel free to contribute and report issues on GitHub! Happy cracking! 🎉
-
-## <p><style="color:red;">THIS IS MEANT FOR EDUCATIONAL PURPOSES ONLY DO NOT MISUSE AS THE AUTHOR IS NOT RESPONSIBLE FOR ANY MISUE OR DAMAGE CAUSED BY THIS SCRIPT</style></P>
-
+## <p style="color:red;">THIS IS MEANT FOR EDUCATIONAL PURPOSES ONLY. DO NOT MISUSE, AS THE AUTHOR IS NOT RESPONSIBLE FOR ANY MISUSE OR DAMAGE CAUSED BY THIS SCRIPT.</p>
 
 
