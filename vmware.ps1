@@ -18,6 +18,18 @@ function Animate-Loading {
     }
 }
 
+# Function for animated rotating loading
+function Animate-Rotating-Loading {
+    $spinner = @("/", "-", "\\", "|")
+    for ($i = 0; $i -le 5; $i++) {
+        foreach ($spin in $spinner) {
+            Write-Host -NoNewline "$spin`r"
+            Start-Sleep -Milliseconds 200
+        }
+    }
+    Clear-Host
+}
+
 # Function to show the main user interface
 function Show-UI {
     Clear-Host
@@ -34,6 +46,7 @@ function Show-UI {
     Print-Colored "2. Download" -ForegroundColor Green
     Print-Colored "3. Detect Version" -ForegroundColor Green
     Print-Colored "4. Exit" -ForegroundColor Red
+    Print-Colored "Written by: CHEGEBB" -ForegroundColor Cyan
 
     $option = Read-Host "Select an option"
 
@@ -69,7 +82,7 @@ function Crack-Menu {
     switch ($option) {
         "1" { Crack "pro" }
         "2" { Crack "player" }
-        "3" { Detect-Version }
+        "3" { Crack-FusionPro }
         "4" { Exit }
         default {
             Print-Colored "Invalid Option!" -ForegroundColor Red
@@ -104,6 +117,16 @@ function Animate-Startup {
     }
 }
 
+# Function for the Fusion Pro crack operation
+function Crack-FusionPro {
+    # Display the Fusion Pro key
+    Print-Colored "Fusion Pro Key: YF390-0HF8P-M81RQ-2DXQE-M2UT6" -ForegroundColor Cyan
+
+    Animate-Cracking-Countdown
+    Print-Colored "Cracked Successfully!" -ForegroundColor Green
+    Open-Vmware-With-Key-Gui "YF390-0HF8P-M81RQ-2DXQE-M2UT6"
+}
+
 # Function for the crack operation
 function Crack {
     param (
@@ -111,7 +134,6 @@ function Crack {
     )
 
     Animate-Startup
-    Animate-Cracking-Countdown
 
     # Keys in the script labeled as valid
     $keys = @(
@@ -134,6 +156,11 @@ function Crack {
         Use-Keys $keys
         Print-Colored "Exiting..." -ForegroundColor Red
         Exit
+    }
+
+    # If Fusion Pro is selected, call the specific function
+    if ($version -eq "fusionpro") {
+        Crack-FusionPro
     }
 
     Print-Colored "Cracking... Please wait." -ForegroundColor Yellow
@@ -179,19 +206,13 @@ function Open-Vmware-With-Key-Gui {
     param (
         [string]$key
     )
-    $objForm = New-Object System.Windows.Forms.Form
-    $objForm.Text = "VMware Key Activation"
-    $objForm.Size = New-Object System.Drawing.Size(300,200)
-    $objForm.StartPosition = "CenterScreen"
-    
-    $objLabel = New-Object System.Windows.Forms.Label
-    $objLabel.Location = New-Object System.Drawing.Size(20,20)
-    $objLabel.Size = New-Object System.Drawing.Size(260,20)
-    $objLabel.Text = "Please input the following key in VMware:`n`n$key"
-    
-    $objForm.Controls.Add($objLabel)
-    
-    $objForm.ShowDialog()
+
+    # Display the key
+    Print-Colored "VMware Key: $key" -ForegroundColor Cyan
+
+    # Add your code here to open VMware with the provided key using GUI
+    # For example, you might want to display a message to the user or run a command
+    # to activate VMware with the provided key.
 }
 
 # Function for downloading
