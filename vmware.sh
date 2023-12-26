@@ -23,7 +23,7 @@ animate_loading() {
 show_ui() {
     clear
     print_colored "
-    Welcome to the Vmware Cracking script.This script was written by CHEGEBB follow me on github for more.
+    Welcome to the Vmware Cracking script. This script was written by CHEGEBB. Follow me on GitHub for more.
     ____   ____               _________                       __
     \\   \\ /   /____           \\_   ___ \\____________    ____ |  | __ ___________
      \\   Y   /     \\   ______ /    \\  \\/\\_  __ \\__  \\ _/ ___\\|  |/ // __ \\_  __ \\
@@ -68,8 +68,9 @@ crack_menu() {
     case $option in
         1) crack "pro" ;;
         2) crack "player" ;;
-        3) detect_version ;;
-        4) exit ;;
+        3) crack "fusion_pro" ;;
+        4) crack "fusion_player" ;;
+        5) detect_version ;;
         *)
             print_colored "Invalid Option!" "\e[91m"
             sleep 1
