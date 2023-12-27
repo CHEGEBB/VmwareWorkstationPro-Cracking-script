@@ -211,9 +211,6 @@ function Open-Vmware-With-Key-Gui {
     # Display the key
     Print-Colored "VMware Key: $key" -ForegroundColor Cyan
 
-    # Add your code here to open VMware with the provided key using GUI
-    # For example, you might want to display a message to the user or run a command
-    # to activate VMware with the provided key.
 }
 
 # Function to detect the version with animated progress
