@@ -107,10 +107,38 @@ def crack_menu():
         detect_version()
     elif option == "4":
         sys.exit()
+    elif option == "5":
+        esxi_menu()
     else:
         print_colored("Invalid Option!", "\033[91m")
         time.sleep(1)
         show_ui()
+
+def esxi_menu():
+    print_colored("Select ESXi Version:", "\033[92m")
+    print_colored("1. vSphere 6 Enterprise Plus\n2. vSphere with Operations Management 6 Enterprise\n3. vSphere ESXi 7.0 Enterprise Plus\n4. vSAN 7 Enterprise Plus\n5. vSphere 7 Enterprise Plus with Add-on for Kubernetes\n6. vCenter Server 7 Standard\n7. vSphere 7 Enterprise Plus with Add-on for Kubernetes\n8. vSphere ESXi 8.0 Enterprise\n9. vSphere ESXi 8.0 Enterprise Plus\n10. vSphere 8.0 Standard", "\033[92m")
+
+    option = input("Select an option: ")
+
+    esxi_keys = {
+        "1": ["1C20K-4Z214-H84U1-T92EP-92838", "1A2JU-DEH12-48460-CT956-AC84D", "MC28R-4L006-484D1-VV8NK-C7R58", "5C6TK-4C39J-48E00-PH0XH-828Q4", "4A4X0-69HE3-M8548-6L1QK-1Y240"],
+        "2": ["4Y2NU-4Z301-085C8-M18EP-2K8M8", "1Y48R-0EJEK-084R0-GK9XM-23R52", "5Z6HK-61L00-M84A0-VR2GP-26UK4", "MF4M2-4RL8P-085L8-QVANK-8P832", "JY2WK-6G10L-H81Z0-QUCZP-1Y842"],
+        "3": ["JJ2WR-25L9P-H71A8-6J20P-C0K3F", "HN2X0-0DH5M-M78Q1-780HH-CN214", "JH09A-2YL84-M7EC8-FL0K2-3N2J2"],
+        "4": ["JG0RU-8AJEN-M8069-X23X0-330P8"],
+        "5": ["0G0X0-DL29M-489T1-0C3GK-1Z2J6"],
+        "6": ["MA6NU-6RL07-484V8-WA1XP-87ALF"],
+        "7": ["J1608-4GJEQ-071L8-9VA0H-2MUK6", "M10DH-8YL47-474L1-DV3U0-8H054", "MM4MR-2G005-H7039-JVCAP-2RAL8"],
+        "8": ["4F40H-4ML1K-M89U0-0C2N4-1AKL4"],
+        "9": ["4V492-44210-48830-931GK-2PRJ4", "HG00K-03H8K-48929-8K1NP-3LUJ4"],
+        "10": ["4F282-0MLD2-M8869-T89G0-CF240", "0F41K-0MJ4H-M88U1-0C3N0-0A214"]
+    }
+
+    if option in esxi_keys:
+        key = random.choice(esxi_keys[option])
+        print_colored(f"Selected Key: {key}", "\033[95m")
+        input("Please use the selected key for your ESXi version. Press Enter when done.")
+    else:
+        print_colored("Invalid Option!", "\033[91m")
 
 def animate_startup():
     frames = [
